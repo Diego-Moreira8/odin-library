@@ -13,12 +13,18 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addToLibrary() {
-  myLibrary.push(new Book("asdf", "QWER", 23, true));
+function addToLibrary(title, author, pages, read) {
+  myLibrary.push(new Book(title, author, pages, read));
 }
 
 function refreshBookArea() {
+  bookArea.innerHTML = ""; // Clear before adds
   for (let book of myLibrary) {
-    bookArea.innerHTML += `<div>${book.title}</div>`;
+    bookArea.innerHTML += `<div class="book">
+    <div class="book-title">${book.title}</div>
+    <div class="book-author">${book.author}</div>
+    <div class="book-pages">${book.pages}</div>
+    <div class="book-read">${book.read}</div>
+    </div>`;
   }
 }
