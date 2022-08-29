@@ -11,7 +11,25 @@
   <body>
     <h1>My Library</h1>
     <main>
-      <button type="button" class="add-book">Adicionar</button>
+      <form class="add-book">
+        <div>
+          <label for="title-field">Título</label>
+          <input type="text" name="title" id="title-field" />
+        </div>
+        <div>
+          <label for="author-field">Autor</label>
+          <input type="text" name="author" id="author-field" />
+        </div>
+        <div>
+          <label for="pages-field">Páginas</label>
+          <input type="number" name="pages" id="pages-field" />
+        </div>
+        <div>
+          <label for="read-field">Lido?</label>
+          <input type="checkbox" name="read" id="read-field" />
+        </div>
+        <button type="submit" class="add-book">Adicionar</button>
+      </form>
       <div class="books-area"></div>
     </main>
     <script src="./script.js"></script>

@@ -1,8 +1,7 @@
 const bookArea = document.querySelector(".books-area");
 const addBook = document.querySelector(".add-book");
 
-addBook.addEventListener("click", addToLibrary);
-addBook.addEventListener("click", refreshBookArea);
+addBook.addEventListener("submit", addToLibrary);
 
 let myLibrary = [];
 
@@ -13,8 +12,14 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addToLibrary(title, author, pages, read) {
+function addToLibrary(e) {
+  e.preventDefault();
+  let title = addBook.title.value,
+    author = addBook.author.value,
+    pages = addBook.pages.value,
+    read = addBook.read.checked;
   myLibrary.push(new Book(title, author, pages, read));
+  refreshBookArea();
 }
 
 function refreshBookArea() {
