@@ -1,18 +1,18 @@
 const bookArea = document.querySelector(".books-area");
 const addBook = document.querySelector(".add-book");
 
-addBook.addEventListener("submit", addToLibrary);
+addBook.addEventListener("submit", addToMyLibrary);
 
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, indexOnLibrary) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
 }
 
-function addToLibrary(e) {
+function addToMyLibrary(e) {
   e.preventDefault();
   let title = addBook.title.value,
     author = addBook.author.value,
@@ -28,6 +28,8 @@ function refreshBookArea() {
     // Create a new book card
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
+    // Add a custom attribute to identify the index
+    bookCard.setAttribute("data-book-index", myLibrary.indexOf(book));
     // Create the book's details
     const title = document.createElement("div");
     title.classList.add("book-title");
@@ -65,6 +67,8 @@ function refreshBookArea() {
   );
 }
 
-function removeBook() {
-  alert("HEYY");
+function removeBook(e) {
+  const bookIndex = e.target.parentElement.getAttribute("data-book-index");
+  myLibrary.splice(bookIndex, 1);
+  refreshBookArea();
 }
