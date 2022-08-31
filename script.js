@@ -5,7 +5,7 @@ addBook.addEventListener("submit", addToMyLibrary);
 
 let myLibrary = [];
 
-function Book(title, author, pages, read, indexOnLibrary) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -45,7 +45,18 @@ function refreshBookArea() {
 
     const read = document.createElement("div");
     read.classList.add("book-read");
-    read.textContent = `${book.read}`;
+    const readLabel = document.createElement("label");
+    readLabel.textContent = "Lido";
+    // Criates a unique ID for the label/input
+    readLabel.setAttribute("for", `book${myLibrary.indexOf(book)}-checkbox`);
+    const readCheckBox = document.createElement("input");
+    readCheckBox.setAttribute("id", `book${myLibrary.indexOf(book)}-checkbox`);
+    readCheckBox.setAttribute("type", "checkbox");
+    // Checks if the book is read
+    if (book.read) readCheckBox.checked = true;
+    // Append on the read div
+    read.appendChild(readLabel);
+    read.appendChild(readCheckBox);
 
     const removeBookButton = document.createElement("button");
     removeBookButton.type = "button";
