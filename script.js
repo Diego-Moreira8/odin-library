@@ -44,12 +44,27 @@ function refreshBookArea() {
     const read = document.createElement("div");
     read.classList.add("book-read");
     read.textContent = `${book.read}`;
+
+    const removeBookButton = document.createElement("button");
+    removeBookButton.type = "button";
+    removeBookButton.classList.add("remove-book");
+    removeBookButton.textContent = "Apagar";
     // Append them on the book-card
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
     bookCard.appendChild(read);
+    bookCard.appendChild(removeBookButton);
     // Append book-card on the book-area
     bookArea.appendChild(bookCard);
   }
+  // Add event to all buttons created
+  const removeBookButtons = document.querySelectorAll(".remove-book");
+  removeBookButtons.forEach((button) =>
+    button.addEventListener("click", removeBook)
+  );
+}
+
+function removeBook() {
+  alert("HEYY");
 }
