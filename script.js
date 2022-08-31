@@ -52,6 +52,8 @@ function refreshBookArea() {
     const readCheckBox = document.createElement("input");
     readCheckBox.setAttribute("id", `book${myLibrary.indexOf(book)}-checkbox`);
     readCheckBox.setAttribute("type", "checkbox");
+    // Class for the event listener
+    readCheckBox.classList.add("read-status");
     // Checks if the book is read
     if (book.read) readCheckBox.checked = true;
     // Append on the read div
@@ -76,10 +78,21 @@ function refreshBookArea() {
   removeBookButtons.forEach((button) =>
     button.addEventListener("click", removeBook)
   );
+  const readStatus = document.querySelectorAll(".read-status");
+  readStatus.forEach((button) =>
+    button.addEventListener("change", changeReadStatus)
+  );
 }
 
 function removeBook(e) {
   const bookIndex = e.target.parentElement.getAttribute("data-book-index");
   myLibrary.splice(bookIndex, 1);
+  refreshBookArea();
+}
+
+function changeReadStatus(e) {
+  const bookIndex =
+    e.target.parentElement.parentElement.getAttribute("data-book-index");
+  myLibrary[bookIndex].read = e.target.checked;
   refreshBookArea();
 }
