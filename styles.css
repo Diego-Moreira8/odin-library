@@ -1,0 +1,52 @@
+:root {
+  font-family: sans-serif;
+}
+
+body {
+  padding: 32px;
+}
+
+header {
+  margin-bottom: 32px;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+main {
+  display: flex;
+  flex-flow: column;
+}
+
+.add-book {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.books-area {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+  padding: 16px;
+}
+
+.book-card {
+  border: 1px solid gray;
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.book-card div:first-of-type {
+  margin-bottom: 24px;
+}
+
+.book-card div {
+  margin-bottom: 16px;
+}
+
+.book-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
