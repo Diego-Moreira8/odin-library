@@ -3,6 +3,16 @@ const addBook = document.querySelector(".add-book");
 
 addBook.addEventListener("submit", addToMyLibrary);
 
+// Modal
+const openModalButton = document.getElementById("open-modal");
+const closeModalButton = document.getElementById("close-modal");
+const modalOverlay = document.getElementById("overlay");
+
+openModalButton.addEventListener("click", () => {
+  modalOverlay.classList.add("active");
+  addBook.classList.add("active");
+});
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {

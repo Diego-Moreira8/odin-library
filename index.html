@@ -13,7 +13,7 @@
       <h1>Minha Biblioteca</h1>
     </header>
     <main>
-      <button>Adicionar livro</button>
+      <button id="open-modal">Adicionar livro</button>
       <form class="add-book">
         <fieldset>
           <legend>Adicionar livro</legend>
@@ -35,10 +35,11 @@
           </div>
           <div>
             <button type="submit">Adicionar</button>
-            <button type="button">Cancelar</button>
+            <button type="button" id="close-modal">Cancelar</button>
           </div>
         </fieldset>
       </form>
+      <div id="overlay"></div>
       <div class="books-area"></div>
     </main>
     <script src="./script.js"></script>
