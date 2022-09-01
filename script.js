@@ -13,6 +13,11 @@ openModalButton.addEventListener("click", () => {
   addBook.classList.add("active");
 });
 
+closeModalButton.addEventListener("click", () => {
+  modalOverlay.classList.remove("active");
+  addBook.classList.remove("active");
+});
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -30,6 +35,8 @@ function addToMyLibrary(e) {
     read = addBook.read.checked;
   myLibrary.push(new Book(title, author, pages, read));
   refreshBookArea();
+  modalOverlay.classList.remove("active");
+  addBook.classList.remove("active");
 }
 
 function refreshBookArea() {
