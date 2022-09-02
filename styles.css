@@ -2,10 +2,10 @@
   font-family: sans-serif;
   --gradient-start: #432371;
   --gradient-end: #faae7b;
+  --green-color: #88ab75;
 }
 
 body {
-  padding: 32px;
   background: linear-gradient(
     149deg,
     rgba(67, 35, 113, 1) 0%,
@@ -16,11 +16,13 @@ body {
 }
 
 header {
-  margin-bottom: 32px;
+  background-color: rgb(255, 255, 255, 0.6);
+  color: black;
+  padding: 64px 32px 32px 32px;
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 
@@ -40,6 +42,7 @@ main {
   border: 2px solid black;
   z-index: 10;
   background-color: #fff;
+  color: black;
 }
 
 .add-book.active {
@@ -66,15 +69,43 @@ main {
 
 .books-area {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 32px;
-  padding: 16px;
+  padding: 32px 64px;
+}
+
+.book-card,
+#open-modal {
+  border-radius: 8px;
+  padding: 32px;
+  min-height: 400px;
+  box-sizing: border-box;
+}
+
+header,
+.book-card,
+#open-modal {
+  box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.25);
+}
+
+#open-modal {
+  border: none;
+  background-color: var(--green-color);
+  color: white;
+  line-height: 0.75;
+}
+
+#open-modal div:first-of-type {
+  font-size: 200px;
+}
+
+#open-modal div:nth-of-type(2) {
+  font-size: 1.5rem;
 }
 
 .book-card {
-  border: 1px solid gray;
-  border-radius: 16px;
-  padding: 32px;
+  background-color: rgb(255, 255, 255, 0.5);
+  color: black;
 }
 
 .book-card div:first-of-type {
