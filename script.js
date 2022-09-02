@@ -42,6 +42,7 @@ function addToMyLibrary(e) {
 
 function refreshBookArea() {
   bookArea.innerHTML = ""; // Clear before adds
+  bookArea.appendChild(openModalButton);
   for (let book of myLibrary) {
     // Create a new book card
     const bookCard = document.createElement("div");

@@ -6,6 +6,13 @@
 
 body {
   padding: 32px;
+  background: linear-gradient(
+    149deg,
+    rgba(67, 35, 113, 1) 0%,
+    rgba(250, 174, 123, 1) 100%
+  );
+  background-attachment: fixed;
+  color: white;
 }
 
 header {
