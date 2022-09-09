@@ -39,10 +39,18 @@ main {
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: 100ms ease-in-out;
-  border: 2px solid black;
+  border: none;
+  border-radius: 8px;
   z-index: 10;
   background-color: #fff;
   color: black;
+  padding: 32px;
+}
+
+.add-book legend {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
 .add-book.active {
@@ -53,7 +61,7 @@ main {
   position: fixed;
   opacity: 0;
   transition: 100ms ease-in-out;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.1);
   top: 0;
   left: 0;
   bottom: 0;
@@ -64,6 +72,7 @@ main {
 
 #overlay.active {
   opacity: 1;
+  backdrop-filter: blur(5px);
   pointer-events: all;
 }
 
