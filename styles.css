@@ -50,11 +50,68 @@ main {
 .add-book legend {
   font-size: 2rem;
   font-weight: bold;
+  margin-bottom: 32px;
+}
+
+.add-book input {
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 1.5rem;
+  padding: 4px;
+}
+
+.add-book input:focus {
+  outline: none;
+  background-color: rgb(244, 244, 244);
+}
+
+.add-book label {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.add-book div {
+  display: flex;
+  flex-flow: column;
   margin-bottom: 16px;
+}
+
+#read-field-wrap {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+#read-field-wrap label {
+  margin-right: 8px;
+  font-size: 1.5rem;
 }
 
 .add-book.active {
   transform: translate(-50%, -50%) scale(1);
+}
+
+#form-buttons-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 8px;
+  background-color: var(--green-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#close-modal {
+  background-color: rgb(235, 235, 235);
+  color: black;
 }
 
 #overlay {
