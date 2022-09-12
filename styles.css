@@ -1,22 +1,24 @@
 :root {
-  font-family: sans-serif;
+  font-family: serif;
   --gradient-start: #432371;
   --gradient-end: #faae7b;
   --green-color: #88ab75;
+  --book-page-color: #e5d9a8;
 }
 
 body {
-  background: linear-gradient(
+  /* background: linear-gradient(
     149deg,
     rgba(67, 35, 113, 1) 0%,
     rgba(250, 174, 123, 1) 100%
-  );
+  ); */
+  background: rgb(54, 54, 54);
   background-attachment: fixed;
   color: white;
 }
 
 header {
-  background-color: rgb(255, 255, 255, 0.6);
+  background-color: var(--book-page-color);
   color: black;
   padding: 64px 32px 32px 32px;
 }
@@ -42,7 +44,7 @@ main {
   border: none;
   border-radius: 8px;
   z-index: 10;
-  background-color: #fff;
+  background-color: var(--book-page-color);
   color: black;
   padding: 32px;
 }
@@ -54,15 +56,17 @@ main {
 }
 
 .add-book input {
+  font-family: serif;
   border: none;
   border-bottom: 1px solid black;
   font-size: 1.5rem;
   padding: 4px;
+  background-color: transparent;
 }
 
 .add-book input:focus {
   outline: none;
-  background-color: rgb(244, 244, 244);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .add-book label {
@@ -99,6 +103,7 @@ main {
 }
 
 button {
+  font-family: serif;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -110,7 +115,7 @@ button {
 }
 
 #close-modal {
-  background-color: rgb(235, 235, 235);
+  background-color: rgba(0, 0, 0, 0.05);
   color: black;
 }
 
@@ -118,7 +123,7 @@ button {
   position: fixed;
   opacity: 0;
   transition: 100ms ease-in-out;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
   bottom: 0;
@@ -129,7 +134,7 @@ button {
 
 #overlay.active {
   opacity: 1;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(7px);
   pointer-events: all;
 }
 
@@ -143,14 +148,15 @@ button {
 .book-card,
 #open-modal {
   border-radius: 8px;
-  padding: 32px;
+  padding: 64px 32px;
   min-height: 400px;
   box-sizing: border-box;
 }
 
 header,
 .book-card,
-#open-modal {
+#open-modal,
+.add-book {
   box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.25);
 }
 
@@ -170,19 +176,32 @@ header,
 }
 
 .book-card {
-  background-color: rgb(255, 255, 255, 0.5);
+  background-color: var(--book-page-color);
   color: black;
-}
-
-.book-card div:first-of-type {
-  margin-bottom: 24px;
-}
-
-.book-card div {
-  margin-bottom: 16px;
+  display: grid;
+  grid-template-rows: 1fr 2fr repeat(3, 1fr);
 }
 
 .book-title {
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.book-author {
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.book-pages {
+  margin-bottom: 8px;
+}
+
+.book-read label,
+.book-read input {
+  cursor: pointer;
+}
+
+.remove-book {
+  background-color: darkred;
 }

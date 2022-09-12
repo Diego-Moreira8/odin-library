@@ -60,7 +60,7 @@ function refreshBookArea() {
 
     const pages = document.createElement("div");
     pages.classList.add("book-pages");
-    pages.textContent = `${book.pages}`;
+    pages.textContent = `${book.pages} páginas`;
 
     const read = document.createElement("div");
     read.classList.add("book-read");
