@@ -1,9 +1,9 @@
 :root {
-  font-family: serif;
+  font-family: sans-serif;
   --gradient-start: #432371;
   --gradient-end: #faae7b;
-  --green-color: #88ab75;
-  --book-page-color: #e5d9a8;
+  --green-color: #78a75f;
+  --book-page-color: #e7e7e7;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
     rgba(67, 35, 113, 1) 0%,
     rgba(250, 174, 123, 1) 100%
   ); */
-  background: rgb(54, 54, 54);
+  background-color: #fff;
   background-attachment: fixed;
   color: white;
 }
@@ -20,7 +20,9 @@ body {
 header {
   background-color: var(--book-page-color);
   color: black;
-  padding: 64px 32px 32px 32px;
+  padding: 32px;
+  margin: 16px;
+  border-radius: 16px;
 }
 
 h1 {
@@ -56,7 +58,7 @@ main {
 }
 
 .add-book input {
-  font-family: serif;
+  font-family: sans-serif;
   border: none;
   border-bottom: 1px solid black;
   font-size: 1.5rem;
@@ -103,7 +105,7 @@ main {
 }
 
 button {
-  font-family: serif;
+  font-family: sans-serif;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -157,7 +159,7 @@ header,
 .book-card,
 #open-modal,
 .add-book {
-  box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 #open-modal {
