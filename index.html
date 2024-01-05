@@ -4,48 +4,48 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
     <title>Biblioteca</title>
   </head>
   <body>
-    <header>
-      <h1>Minha Biblioteca</h1>
-    </header>
-    <main>
-      <form class="add-book">
-        <fieldset>
-          <legend>Adicionar livro</legend>
-          <div>
-            <label for="title-field">Título:</label>
-            <input type="text" name="title" id="title-field" />
-          </div>
-          <div>
-            <label for="author-field">Autor:</label>
-            <input type="text" name="author" id="author-field" />
-          </div>
-          <div>
-            <label for="pages-field">Páginas:</label>
-            <input type="number" name="pages" id="pages-field" />
-          </div>
-          <div id="read-field-wrap">
-            <label for="read-field">Lido?</label>
-            <input type="checkbox" name="read" id="read-field" />
-          </div>
-          <div id="form-buttons-wrap">
-            <button type="button" id="close-modal">Cancelar</button>
-            <button type="submit">Adicionar</button>
-          </div>
-        </fieldset>
-      </form>
-      <div id="overlay"></div>
-      <div class="books-area">
-        <button id="open-modal">
-          <div>+</div>
-          <div>Adicionar livro</div>
-        </button>
-      </div>
-    </main>
-    <script src="./script.js"></script>
+    <h1>Minha Biblioteca</h1>
+
+    <form>
+      <fieldset>
+        <legend>Adicionar livro</legend>
+
+        <div class="form-row">
+          <label for="title">Título:</label>
+          <input type="text" name="title" id="title" />
+        </div>
+
+        <div class="form-row">
+          <label for="author">Autor:</label>
+          <input type="text" name="author" id="author" />
+        </div>
+
+        <div class="form-row">
+          <label for="total-pages">Número de páginas:</label>
+          <input type="number" name="total-pages" id="total-pages" />
+        </div>
+
+        <div class="form-row">
+          <label for="read-check">Já lido?</label>
+          <input type="checkbox" name="read" id="read-check" />
+        </div>
+
+        <div class="form-row">
+          <label for="read-pages">Páginas lidas:</label>
+          <input type="number" name="read-pages" id="read-pages" />
+        </div>
+
+        <button type="submit">Adicionar</button>
+      </fieldset>
+    </form>
+
+    <ul id="books-list"></ul>
+    <button id="add-book">Adicionar livro</button>
+
+    <!-- <script src="./index.js"></script> -->
   </body>
 </html>
