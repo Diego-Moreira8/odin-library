@@ -5,7 +5,7 @@ class Book {
     this.author = author;
     this.totalPages = totalPages;
     this.read = read;
-    this.readPages = this.read ? this.totalPages : readPages;
+    this.readPages = read ? totalPages : readPages;
   }
 
   getTitle = () => this.title;
