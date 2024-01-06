@@ -35,8 +35,8 @@ class UI {
     const openAddBookElements = document.querySelectorAll(".open-add-book");
 
     addBookForm.addEventListener("submit", (e) => {
-      this.closeAddBookForm();
       this.handleAddBook(e);
+      this.closeAddBookForm();
     });
 
     closeAddBookElements.forEach((el) =>
