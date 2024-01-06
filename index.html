@@ -19,15 +19,21 @@
         <legend>Adicionar livro</legend>
         <div class="form-row">
           <label for="title">Título:</label>
-          <input type="text" name="title" id="title" />
+          <input type="text" name="title" id="title" required />
         </div>
         <div class="form-row">
           <label for="author">Autor:</label>
-          <input type="text" name="author" id="author" />
+          <input type="text" name="author" id="author" required />
         </div>
         <div class="form-row">
           <label for="total-pages">Número de páginas:</label>
-          <input type="number" name="totalPages" id="total-pages" />
+          <input
+            type="number"
+            name="totalPages"
+            id="total-pages"
+            value="0"
+            required
+          />
         </div>
         <div class="form-row">
           <label for="read-check">Já lido?</label>
@@ -35,7 +41,13 @@
         </div>
         <div class="form-row">
           <label for="read-pages">Páginas lidas:</label>
-          <input type="number" name="readPages" id="read-pages" />
+          <input
+            type="number"
+            name="readPages"
+            id="read-pages"
+            value="0"
+            required
+          />
         </div>
         <button type="submit">Adicionar</button>
         <button type="button" class="close-add-book">Cancelar</button>
