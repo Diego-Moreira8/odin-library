@@ -31,7 +31,21 @@ class UI {
 
   start() {
     const addBookForm = document.querySelector("form");
-    addBookForm.addEventListener("submit", (e) => this.handleAddBook(e));
+    const closeAddBookElements = document.querySelectorAll(".close-add-book");
+    const openAddBookElements = document.querySelectorAll(".open-add-book");
+
+    addBookForm.addEventListener("submit", (e) => {
+      this.closeAddBookForm();
+      this.handleAddBook(e);
+    });
+
+    closeAddBookElements.forEach((el) =>
+      el.addEventListener("click", () => this.closeAddBookForm())
+    );
+
+    openAddBookElements.forEach((el) =>
+      el.addEventListener("click", () => this.openAddBookForm())
+    );
 
     this.update();
   }
@@ -62,6 +76,26 @@ class UI {
     const { title, author, totalPages, read, readPages } = formData;
     this.library.addBook(title, author, totalPages, !!read, readPages);
     this.update();
+  }
+
+  openAddBookForm() {
+    document.querySelector("form").reset();
+
+    [
+      document.querySelector(".overlay"),
+      document.querySelector("form"),
+    ].forEach((el) => el.classList.add("active"));
+
+    document.querySelector("#title").focus();
+  }
+
+  closeAddBookForm() {
+    [
+      document.querySelector(".overlay"),
+      document.querySelector("form"),
+    ].forEach((el) => el.classList.remove("active"));
+
+    document.querySelector("form").reset();
   }
 }
 

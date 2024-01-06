@@ -1,0 +1,28 @@
+body {
+  font-family: sans-serif;
+}
+body .overlay {
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(20, 36, 208, 0.1725490196);
+}
+body .overlay.active {
+  visibility: visible;
+}
+body form {
+  visibility: hidden;
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: lightgrey;
+}
+body form.active {
+  visibility: visible;
+}
+
+/*# sourceMappingURL=styles.css.map */
