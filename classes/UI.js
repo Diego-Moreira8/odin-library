@@ -4,11 +4,27 @@ class UI {
   constructor() {
     this.library = new Library();
 
-    // this.library.addBook("a", "b", 10, true, 10);
-    // this.library.addBook("b", "b", 10, false, 5);
-    // this.library.addBook("c", "b", 100, true, 10);
-    // this.library.addBook("d", "b", 10, true, 10);
-    // this.library.addBook("e", "b", 10, false, 100);
+    this.library.addBook(
+      "O Último Desejo",
+      "Andrzej Sapkowski",
+      300,
+      true,
+      300
+    );
+    this.library.addBook(
+      "A Espada do Destino",
+      "Andrzej Sapkowski",
+      400,
+      true,
+      400
+    );
+    this.library.addBook(
+      "O Sangue dos Elfos",
+      "Andrzej Sapkowski",
+      400,
+      false,
+      40
+    );
 
     this.start();
   }
@@ -26,15 +42,17 @@ class UI {
     booksList.innerHTML = "";
 
     for (let book of this.library.getBooks()) {
-      const li = document.createElement("li");
-      li.textContent = `
-        ${book.getTitle()} --
-        ${book.getAuthor()} --
-        ${book.getTotalPages()} --
-        ${book.getRead()} --
-        ${book.getReadPages()} 
-      `;
-      booksList.appendChild(li);
+      const fragment = document.createDocumentFragment();
+      const bookBtn = document.createElement("button");
+      const titleDiv = document.createElement("div");
+      const authorDiv = document.createElement("div");
+
+      titleDiv.textContent = `${book.getTitle()}`;
+      authorDiv.textContent = `${book.getAuthor()}`;
+
+      [titleDiv, authorDiv].forEach((el) => bookBtn.appendChild(el));
+      fragment.appendChild(document.createElement("li")).appendChild(bookBtn);
+      booksList.appendChild(fragment);
     }
   }
 
