@@ -34,6 +34,8 @@ class UI {
     const closeAddBookElements = document.querySelectorAll(".close-add-book");
     const openAddBookElements = document.querySelectorAll(".open-add-book");
 
+    this.formValidation();
+
     addBookForm.addEventListener("submit", (e) => {
       this.handleAddBook(e);
       this.closeAddBookForm();
@@ -96,6 +98,43 @@ class UI {
     ].forEach((el) => el.classList.remove("active"));
 
     document.querySelector("form").reset();
+
+    document.querySelector("#read-pages").disabled = false;
+  }
+
+  formValidation() {
+    const totalPages = document.querySelector("#total-pages");
+    const readCheck = document.querySelector("#read-check");
+    const readPages = document.querySelector("#read-pages");
+
+    totalPages.addEventListener("input", () => {
+      if (totalPages.value < readPages.value) {
+        totalPages.setCustomValidity(
+          "O total de páginas não pode ser menor que as páginas lidas!"
+        );
+      } else {
+        totalPages.setCustomValidity("");
+      }
+
+      totalPages.reportValidity();
+    });
+
+    readCheck.addEventListener("change", () => {
+      readPages.value = readCheck.checked ? totalPages.value : 0;
+      readPages.disabled = readCheck.checked;
+    });
+
+    readPages.addEventListener("input", () => {
+      if (readPages.value > totalPages.value) {
+        readPages.setCustomValidity(
+          "O total de páginas não pode ser menor que as páginas lidas!"
+        );
+      } else {
+        readPages.setCustomValidity("");
+      }
+
+      readPages.reportValidity();
+    });
   }
 }
 
