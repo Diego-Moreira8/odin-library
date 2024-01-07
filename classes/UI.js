@@ -114,6 +114,7 @@ class UI {
         );
       } else {
         totalPages.setCustomValidity("");
+        readPages.setCustomValidity("");
       }
 
       totalPages.reportValidity();
@@ -125,11 +126,13 @@ class UI {
     });
 
     readPages.addEventListener("input", () => {
-      if (readPages.value > totalPages.value) {
+      if (totalPages.value < readPages.value) {
         readPages.setCustomValidity(
           "O total de páginas não pode ser menor que as páginas lidas!"
         );
       } else {
+        totalPages.reportValidity();
+
         readPages.setCustomValidity("");
       }
 
