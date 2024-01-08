@@ -136,27 +136,50 @@ class UI {
   }
 
   openBookDetails(book) {
+    const overlay = document.querySelector(".overlay");
+    const bookDetails = document.querySelector("#book-details");
     const titleDiv = document.querySelector("#book-details .title");
     const authorDiv = document.querySelector("#book-details .author");
     const pagesReadInput = document.querySelector("#edit-read-pages");
     const pagesReadControls = document.querySelectorAll(
       "#book-details .pages-read button"
     );
+    const closeBookDetailsElements = document.querySelectorAll(
+      ".close-book-details"
+    );
+
+    [overlay, bookDetails].forEach((el) => el.classList.add("active"));
 
     titleDiv.textContent = book.getTitle();
     authorDiv.textContent = book.getAuthor();
     pagesReadInput.value = book.getReadPages();
 
+    const handleSetReadPages = (e) => {
+      book.setReadPages(
+        e.target.className === "increment"
+          ? book.getReadPages() + 1
+          : book.getReadPages() - 1
+      );
+      pagesReadInput.value = book.getReadPages();
+    };
+
     pagesReadControls.forEach((btn) =>
-      btn.addEventListener("click", () => {
-        book.setReadPages(
-          btn.className === "increment"
-            ? book.getReadPages() + 1
-            : book.getReadPages() - 1
-        );
-        pagesReadInput.value = book.getReadPages();
-      })
+      btn.addEventListener("click", handleSetReadPages)
     );
+
+    closeBookDetailsElements.forEach((el) => {
+      el.addEventListener(
+        "click",
+        () => {
+          console.log("close");
+          pagesReadControls.forEach((btn) =>
+            btn.removeEventListener("click", handleSetReadPages)
+          );
+          bookDetails.classList.remove("active");
+        },
+        { once: true }
+      );
+    });
   }
 }
 

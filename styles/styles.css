@@ -13,7 +13,8 @@ body .overlay {
 body .overlay.active {
   visibility: visible;
 }
-body form#add-book {
+body form#add-book,
+body #book-details {
   visibility: hidden;
   position: absolute;
   top: 1rem;
@@ -21,7 +22,8 @@ body form#add-book {
   transform: translateX(-50%);
   background-color: lightgrey;
 }
-body form#add-book.active {
+body form#add-book.active,
+body #book-details.active {
   visibility: visible;
 }
 

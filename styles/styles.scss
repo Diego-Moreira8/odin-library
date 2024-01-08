@@ -15,7 +15,8 @@ body {
     }
   }
 
-  form#add-book {
+  form#add-book,
+  #book-details {
     visibility: hidden;
     position: absolute;
     top: 1rem;
