@@ -10,11 +10,35 @@
   <body>
     <h1>Minha Biblioteca</h1>
 
+    <ul id="books-list"></ul>
+
     <button type="button" class="open-add-book">Adicionar livro</button>
+
+    <hr />
 
     <div class="overlay close-add-book"></div>
 
-    <form>
+    <div id="book-details">
+      <div class="title"></div>
+      <div class="author"></div>
+      <div class="pages-read">
+        <label for="edit-read-pages">Páginas lidas:</label>
+        <button type="button" class="decrement">-</button>
+        <input
+          type="number"
+          name="editReadPages"
+          id="edit-read-pages"
+          value="0"
+          min="0"
+          required
+        />
+        <button type="button" class="increment">+</button>
+      </div>
+      <button type="button">Editar</button>
+      <button type="button">Apagar</button>
+    </div>
+
+    <form id="add-book">
       <fieldset>
         <legend>Adicionar livro</legend>
         <div class="form-row">
@@ -55,8 +79,6 @@
         <button type="button" class="close-add-book">Cancelar</button>
       </fieldset>
     </form>
-
-    <ul id="books-list"></ul>
 
     <script src="./index.js" type="module"></script>
   </body>

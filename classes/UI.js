@@ -4,13 +4,7 @@ class UI {
   constructor() {
     this.library = new Library();
 
-    this.library.addBook(
-      "O Último Desejo",
-      "Andrzej Sapkowski",
-      300,
-      true,
-      300
-    );
+    this.library.addBook("O Último Desejo", "Andrzej Sapkowski", 5, true, 5);
     this.library.addBook(
       "A Espada do Destino",
       "Andrzej Sapkowski",
@@ -30,7 +24,7 @@ class UI {
   }
 
   start() {
-    const addBookForm = document.querySelector("form");
+    const addBookForm = document.querySelector("form#add-book");
     const closeAddBookElements = document.querySelectorAll(".close-add-book");
     const openAddBookElements = document.querySelectorAll(".open-add-book");
 
@@ -63,6 +57,7 @@ class UI {
       const titleDiv = document.createElement("div");
       const authorDiv = document.createElement("div");
 
+      bookBtn.addEventListener("click", () => this.openBookDetails(book));
       titleDiv.textContent = `${book.getTitle()}`;
       authorDiv.textContent = `${book.getAuthor()}`;
 
@@ -81,11 +76,11 @@ class UI {
   }
 
   openAddBookForm() {
-    document.querySelector("form").reset();
+    document.querySelector("form#add-book").reset();
 
     [
       document.querySelector(".overlay"),
-      document.querySelector("form"),
+      document.querySelector("form#add-book"),
     ].forEach((el) => el.classList.add("active"));
 
     document.querySelector("#title").focus();
@@ -94,10 +89,10 @@ class UI {
   closeAddBookForm() {
     [
       document.querySelector(".overlay"),
-      document.querySelector("form"),
+      document.querySelector("form#add-book"),
     ].forEach((el) => el.classList.remove("active"));
 
-    document.querySelector("form").reset();
+    document.querySelector("form#add-book").reset();
 
     document.querySelector("#read-pages").disabled = false;
   }
@@ -138,6 +133,30 @@ class UI {
 
       readPages.reportValidity();
     });
+  }
+
+  openBookDetails(book) {
+    const titleDiv = document.querySelector("#book-details .title");
+    const authorDiv = document.querySelector("#book-details .author");
+    const pagesReadInput = document.querySelector("#edit-read-pages");
+    const pagesReadControls = document.querySelectorAll(
+      "#book-details .pages-read button"
+    );
+
+    titleDiv.textContent = book.getTitle();
+    authorDiv.textContent = book.getAuthor();
+    pagesReadInput.value = book.getReadPages();
+
+    pagesReadControls.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        book.setReadPages(
+          btn.className === "increment"
+            ? book.getReadPages() + 1
+            : book.getReadPages() - 1
+        );
+        pagesReadInput.value = book.getReadPages();
+      })
+    );
   }
 }
 
