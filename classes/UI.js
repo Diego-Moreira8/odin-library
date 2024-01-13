@@ -26,7 +26,7 @@ class UI {
   start() {
     const addBookBtn = document.querySelector(".open-add-book-form");
 
-    addBookBtn.addEventListener("click", () => this.openAddBookForm());
+    addBookBtn.addEventListener("click", () => this.openBookForm());
     this.addFormValidation();
     this.refreshBooksList();
   }
@@ -52,33 +52,50 @@ class UI {
     }
   }
 
-  openAddBookForm() {
+  openBookForm(book) {
     const overlay = document.querySelector(".overlay");
     const form = document.querySelector("form#add-book");
-    const title = document.querySelector("#title");
-    const readPages = document.querySelector("#read-pages");
-    const cancelBtn = document.querySelector(".cancel-add-book");
+    const legend = form.querySelector("legend");
+    const title = form.querySelector("#title");
+    const author = form.querySelector("#author");
+    const totalPages = form.querySelector("#total-pages");
+    const readCheck = form.querySelector("#read-check");
+    const readPages = form.querySelector("#read-pages");
+    const cancelBtn = form.querySelector(".cancel-add-book");
+    const submitBtn = form.querySelector("button[type='submit']");
 
     const closeAddBook = () => {
       [overlay, cancelBtn].forEach((el) => {
         el.removeEventListener("click", closeAddBook);
       });
-      form.removeEventListener("submit", handleAddBook);
+      form.removeEventListener("submit", handleSubmit);
       [overlay, form].forEach((el) => el.classList.remove("active"));
     };
 
-    const handleAddBook = (e) => {
+    const handleSubmit = (e) => {
       e.preventDefault();
       closeAddBook();
 
       const formData = Object.fromEntries(new FormData(form));
       const { title, author, totalPages, read, readPages } = formData;
 
-      this.library.addBook(title, author, totalPages, !!read, readPages);
+      if (book) {
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setTotalPages(totalPages);
+        book.setReadPages(readPages);
+        this.openBookDetails(book);
+      } else {
+        this.library.addBook(title, author, totalPages, !!read, readPages);
+      }
+
       this.refreshBooksList();
     };
 
     [overlay, form].forEach((el) => el.classList.add("active"));
+
+    legend.textContent = book ? "Editar livro" : "Adicionar livro";
+    submitBtn.textContent = book ? "Salvar alterações" : "Salvar livro";
 
     form.reset();
     // The custom form validation can leave the #read-pages input disabled
@@ -89,7 +106,15 @@ class UI {
       el.addEventListener("click", closeAddBook);
     });
 
-    form.addEventListener("submit", handleAddBook);
+    form.addEventListener("submit", handleSubmit);
+
+    if (book) {
+      title.value = book.getTitle();
+      author.value = book.getAuthor();
+      totalPages.value = book.getTotalPages();
+      readCheck.checked = book.getRead();
+      readPages.value = book.getReadPages();
+    }
   }
 
   addFormValidation() {
@@ -140,26 +165,40 @@ class UI {
     const input = bookDetails.querySelector("input");
     const increment = bookDetails.querySelector(".increment");
     const deleteBtn = bookDetails.querySelector(".delete-book");
+    const editBtn = bookDetails.querySelector(".edit-book");
     const popup = bookDetails.querySelector(".delete-book-popup");
 
     const closeAddBook = () => {
-      [overlay, closeBtn].forEach((el) => {
+      [(overlay, closeBtn)].forEach((el) => {
         el.removeEventListener("click", closeAddBook);
       });
       [decrement, increment].forEach((btn) =>
         btn.removeEventListener("click", changeReadPages)
       );
       deleteBtn.removeEventListener("click", handleDeleteBook);
+      editBtn.removeEventListener("click", handleEditBook);
+      input
+        .removeEventListener("change", changeReadPages)
 
-      [overlay, bookDetails, popup].forEach((el) =>
-        el.classList.remove("active")
-      );
+        [(overlay, bookDetails, popup)].forEach((el) =>
+          el.classList.remove("active")
+        );
     };
 
     const changeReadPages = (e) => {
-      const isIncrementing = e.target.classList.contains("increment");
-      book.setReadPages(book.getReadPages() + (isIncrementing ? 1 : -1));
+      if (e.type === "click") {
+        const isIncrementing = e.target.classList.contains("increment");
+        book.setReadPages(book.getReadPages() + (isIncrementing ? 1 : -1));
+      } else {
+        book.setReadPages(parseInt(input.value));
+      }
+
       input.value = book.getReadPages();
+    };
+
+    const handleEditBook = () => {
+      closeAddBook();
+      this.openBookForm(book);
     };
 
     const handleDeleteBook = () => {
@@ -202,7 +241,10 @@ class UI {
       btn.addEventListener("click", changeReadPages);
     });
 
+    input.addEventListener("change", changeReadPages);
+
     deleteBtn.addEventListener("click", handleDeleteBook);
+    editBtn.addEventListener("click", handleEditBook);
   }
 }
 

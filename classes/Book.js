@@ -32,11 +32,6 @@ class Book {
     }
     this.read = this.readPages === this.totalPages;
   };
-
-  switchRead = () => {
-    this.read = !this.read;
-    if (this.read) this.readPages = this.totalPages;
-  };
 }
 
 export default Book;
