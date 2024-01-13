@@ -175,14 +175,14 @@ class UI {
       [decrement, increment].forEach((btn) =>
         btn.removeEventListener("click", changeReadPages)
       );
-      deleteBtn.removeEventListener("click", handleDeleteBook);
-      editBtn.removeEventListener("click", handleEditBook);
-      input
-        .removeEventListener("change", changeReadPages)
+      [deleteBtn, editBtn].forEach((btn) => {
+        btn.removeEventListener("click", handleDeleteBook);
+      });
+      input.removeEventListener("change", changeReadPages);
 
-        [(overlay, bookDetails, popup)].forEach((el) =>
-          el.classList.remove("active")
-        );
+      [overlay, bookDetails, popup].forEach((el) => {
+        el.classList.remove("active");
+      });
     };
 
     const changeReadPages = (e) => {
@@ -243,8 +243,9 @@ class UI {
 
     input.addEventListener("change", changeReadPages);
 
-    deleteBtn.addEventListener("click", handleDeleteBook);
-    editBtn.addEventListener("click", handleEditBook);
+    [deleteBtn, editBtn].forEach((btn) => {
+      btn.addEventListener("click", handleDeleteBook);
+    });
   }
 }
 
