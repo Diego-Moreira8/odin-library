@@ -63,6 +63,7 @@ class UI {
       [overlay, cancelBtn].forEach((el) => {
         el.removeEventListener("click", closeAddBook);
       });
+      form.removeEventListener("submit", handleAddBook);
       [overlay, form].forEach((el) => el.classList.remove("active"));
     };
 
@@ -88,7 +89,7 @@ class UI {
       el.addEventListener("click", closeAddBook);
     });
 
-    form.addEventListener("submit", handleAddBook, { once: true });
+    form.addEventListener("submit", handleAddBook);
   }
 
   addFormValidation() {
@@ -132,47 +133,41 @@ class UI {
   openBookDetails(book) {
     const overlay = document.querySelector(".overlay");
     const bookDetails = document.querySelector("#book-details");
-    const titleDiv = document.querySelector("#book-details .title");
-    const authorDiv = document.querySelector("#book-details .author");
-    const pagesReadInput = document.querySelector("#edit-read-pages");
-    const pagesReadControls = document.querySelectorAll(
-      "#book-details .pages-read button"
-    );
-    const closeBookDetailsElements = document.querySelectorAll(
-      ".close-book-details"
-    );
+    const closeBtn = bookDetails.querySelector(".close-book-details");
+    const title = bookDetails.querySelector(".title");
+    const author = bookDetails.querySelector(".author");
+    const decrement = bookDetails.querySelector(".decrement");
+    const input = bookDetails.querySelector("input");
+    const increment = bookDetails.querySelector(".increment");
+
+    const closeAddBook = () => {
+      [overlay, closeBtn].forEach((el) => {
+        el.removeEventListener("click", closeAddBook);
+      });
+      [decrement, increment].forEach((btn) =>
+        btn.removeEventListener("click", changeReadPages)
+      );
+      [overlay, bookDetails].forEach((el) => el.classList.remove("active"));
+    };
+
+    const changeReadPages = (e) => {
+      const isIncrementing = e.target.classList.contains("increment");
+      book.setReadPages(book.getReadPages() + (isIncrementing ? 1 : -1));
+      input.value = book.getReadPages();
+    };
 
     [overlay, bookDetails].forEach((el) => el.classList.add("active"));
 
-    titleDiv.textContent = book.getTitle();
-    authorDiv.textContent = book.getAuthor();
-    pagesReadInput.value = book.getReadPages();
+    [overlay, closeBtn].forEach((el) => {
+      el.addEventListener("click", closeAddBook);
+    });
 
-    const handleSetReadPages = (e) => {
-      book.setReadPages(
-        e.target.className === "increment"
-          ? book.getReadPages() + 1
-          : book.getReadPages() - 1
-      );
-      pagesReadInput.value = book.getReadPages();
-    };
+    title.textContent = book.getTitle();
+    author.textContent = book.getAuthor();
+    input.value = book.getReadPages();
 
-    pagesReadControls.forEach((btn) =>
-      btn.addEventListener("click", handleSetReadPages)
-    );
-
-    closeBookDetailsElements.forEach((el) => {
-      el.addEventListener(
-        "click",
-        () => {
-          console.log("close");
-          pagesReadControls.forEach((btn) =>
-            btn.removeEventListener("click", handleSetReadPages)
-          );
-          bookDetails.classList.remove("active");
-        },
-        { once: true }
-      );
+    [decrement, increment].forEach((btn) => {
+      btn.addEventListener("click", changeReadPages);
     });
   }
 }
