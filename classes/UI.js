@@ -140,6 +140,7 @@ class UI {
     const input = bookDetails.querySelector("input");
     const increment = bookDetails.querySelector(".increment");
     const deleteBtn = bookDetails.querySelector(".delete-book");
+    const popup = bookDetails.querySelector(".delete-book-popup");
 
     const closeAddBook = () => {
       [overlay, closeBtn].forEach((el) => {
@@ -150,7 +151,9 @@ class UI {
       );
       deleteBtn.removeEventListener("click", handleDeleteBook);
 
-      [overlay, bookDetails].forEach((el) => el.classList.remove("active"));
+      [overlay, bookDetails, popup].forEach((el) =>
+        el.classList.remove("active")
+      );
     };
 
     const changeReadPages = (e) => {
@@ -160,7 +163,6 @@ class UI {
     };
 
     const handleDeleteBook = () => {
-      const popup = bookDetails.querySelector(".delete-book-popup");
       const confirmDelete = bookDetails.querySelector(".confirm-delete");
       const cancelDelete = bookDetails.querySelector(".cancel-delete");
 
