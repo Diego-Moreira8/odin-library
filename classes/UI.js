@@ -24,29 +24,14 @@ class UI {
   }
 
   start() {
-    const addBookForm = document.querySelector("form#add-book");
-    const closeAddBookElements = document.querySelectorAll(".close-add-book");
-    const openAddBookElements = document.querySelectorAll(".open-add-book");
+    const addBookBtn = document.querySelector(".open-add-book-form");
 
-    this.formValidation();
-
-    addBookForm.addEventListener("submit", (e) => {
-      this.handleAddBook(e);
-      this.closeAddBookForm();
-    });
-
-    closeAddBookElements.forEach((el) =>
-      el.addEventListener("click", () => this.closeAddBookForm())
-    );
-
-    openAddBookElements.forEach((el) =>
-      el.addEventListener("click", () => this.openAddBookForm())
-    );
-
-    this.update();
+    addBookBtn.addEventListener("click", () => this.openAddBookForm());
+    this.addFormValidation();
+    this.refreshBooksList();
   }
 
-  update() {
+  refreshBooksList() {
     const booksList = document.querySelector("#books-list");
 
     booksList.innerHTML = "";
@@ -67,37 +52,46 @@ class UI {
     }
   }
 
-  handleAddBook(e) {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target));
-    const { title, author, totalPages, read, readPages } = formData;
-    this.library.addBook(title, author, totalPages, !!read, readPages);
-    this.update();
-  }
-
   openAddBookForm() {
-    document.querySelector("form#add-book").reset();
+    const overlay = document.querySelector(".overlay");
+    const form = document.querySelector("form#add-book");
+    const title = document.querySelector("#title");
+    const readPages = document.querySelector("#read-pages");
+    const cancelBtn = document.querySelector(".cancel-add-book");
 
-    [
-      document.querySelector(".overlay"),
-      document.querySelector("form#add-book"),
-    ].forEach((el) => el.classList.add("active"));
+    const closeAddBook = () => {
+      [overlay, cancelBtn].forEach((el) => {
+        el.removeEventListener("click", closeAddBook);
+      });
+      [overlay, form].forEach((el) => el.classList.remove("active"));
+    };
 
-    document.querySelector("#title").focus();
+    const handleAddBook = (e) => {
+      e.preventDefault();
+      closeAddBook();
+
+      const formData = Object.fromEntries(new FormData(form));
+      const { title, author, totalPages, read, readPages } = formData;
+
+      this.library.addBook(title, author, totalPages, !!read, readPages);
+      this.refreshBooksList();
+    };
+
+    [overlay, form].forEach((el) => el.classList.add("active"));
+
+    form.reset();
+    // The custom form validation can leave the #read-pages input disabled
+    readPages.disabled = false;
+    title.focus();
+
+    [overlay, cancelBtn].forEach((el) => {
+      el.addEventListener("click", closeAddBook);
+    });
+
+    form.addEventListener("submit", handleAddBook, { once: true });
   }
 
-  closeAddBookForm() {
-    [
-      document.querySelector(".overlay"),
-      document.querySelector("form#add-book"),
-    ].forEach((el) => el.classList.remove("active"));
-
-    document.querySelector("form#add-book").reset();
-
-    document.querySelector("#read-pages").disabled = false;
-  }
-
-  formValidation() {
+  addFormValidation() {
     const totalPages = document.querySelector("#total-pages");
     const readCheck = document.querySelector("#read-check");
     const readPages = document.querySelector("#read-pages");
