@@ -26,5 +26,17 @@ body form#add-book.active,
 body #book-details.active {
   visibility: visible;
 }
+body #book-details .delete-book-popup {
+  visibility: hidden;
+  background-color: burlywood;
+  width: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+body #book-details .delete-book-popup.active {
+  visibility: visible;
+}
 
 /*# sourceMappingURL=styles.css.map */

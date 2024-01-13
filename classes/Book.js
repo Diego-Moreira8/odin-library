@@ -8,6 +8,7 @@ class Book {
     this.readPages = read ? totalPages : readPages;
   }
 
+  getId = () => this.id;
   getTitle = () => this.title;
   getAuthor = () => this.author;
   getTotalPages = () => this.totalPages;

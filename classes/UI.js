@@ -139,6 +139,7 @@ class UI {
     const decrement = bookDetails.querySelector(".decrement");
     const input = bookDetails.querySelector("input");
     const increment = bookDetails.querySelector(".increment");
+    const deleteBtn = bookDetails.querySelector(".delete-book");
 
     const closeAddBook = () => {
       [overlay, closeBtn].forEach((el) => {
@@ -147,6 +148,8 @@ class UI {
       [decrement, increment].forEach((btn) =>
         btn.removeEventListener("click", changeReadPages)
       );
+      deleteBtn.removeEventListener("click", handleDeleteBook);
+
       [overlay, bookDetails].forEach((el) => el.classList.remove("active"));
     };
 
@@ -154,6 +157,33 @@ class UI {
       const isIncrementing = e.target.classList.contains("increment");
       book.setReadPages(book.getReadPages() + (isIncrementing ? 1 : -1));
       input.value = book.getReadPages();
+    };
+
+    const handleDeleteBook = () => {
+      const popup = bookDetails.querySelector(".delete-book-popup");
+      const confirmDelete = bookDetails.querySelector(".confirm-delete");
+      const cancelDelete = bookDetails.querySelector(".cancel-delete");
+
+      popup.classList.add("active");
+
+      confirmDelete.addEventListener(
+        "click",
+        () => {
+          this.library.deleteBook(book.getId());
+          popup.classList.remove("active");
+          closeAddBook();
+          this.refreshBooksList();
+        },
+        { once: true }
+      );
+
+      cancelDelete.addEventListener(
+        "click",
+        () => {
+          popup.classList.remove("active");
+        },
+        { once: true }
+      );
     };
 
     [overlay, bookDetails].forEach((el) => el.classList.add("active"));
@@ -169,6 +199,8 @@ class UI {
     [decrement, increment].forEach((btn) => {
       btn.addEventListener("click", changeReadPages);
     });
+
+    deleteBtn.addEventListener("click", handleDeleteBook);
   }
 }
 
