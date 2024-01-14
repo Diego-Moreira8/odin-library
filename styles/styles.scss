@@ -1,9 +1,16 @@
-body {
-  $sepia-light: #f9f5e9;
-  $sepia-dark: #333;
-  $green: #366f4d;
-  $shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+$sepia-light: #f9f5e9;
+$sepia-dark: #333;
+$green: #366f4d;
+$radius: 0.5rem;
+$shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
 
+* {
+  &:focus {
+    outline: 2px solid $sepia-dark;
+  }
+}
+
+body {
   font-family: "Libre Baskerville", serif;
 
   background-color: $sepia-light;
@@ -18,10 +25,44 @@ body {
   button {
     font: bold 1rem "Libre Baskerville", serif;
     border: 2px solid $sepia-dark;
-    background-color: $sepia-light;
-    border-radius: 0.5rem;
+    background-color: transparent;
+    border-radius: $radius;
     padding: 0.5rem 1.5rem;
     cursor: pointer;
+    //transition: transform 100ms ease-in-out;
+
+    &[type="submit"] {
+      background-color: $green;
+      color: $sepia-light;
+      border: 2px solid $green;
+    }
+
+    &:focus,
+    &:hover {
+      //fix add book btn before
+      //transform: scale(1.025);
+    }
+  }
+
+  input {
+    background-color: rgba(255, 255, 255, 0.5);
+    font: bold 1rem "Libre Baskerville", serif;
+    border: none;
+    border-radius: $radius;
+    padding: 0.5rem 1rem;
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+
+    &:disabled {
+      background-color: transparent;
+      color: grey;
+    }
+
+    &[type="checkbox"] {
+      $size: 2rem;
+      width: $size;
+      height: $size;
+      box-shadow: none;
+    }
   }
 
   #books-list {
@@ -64,6 +105,65 @@ body {
     box-shadow: $shadow;
   }
 
+  form#add-book,
+  #book-details {
+    visibility: hidden;
+
+    background-color: $sepia-light;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    height: 100%;
+
+    &.active {
+      visibility: visible;
+    }
+  }
+
+  form#add-book {
+    fieldset {
+      border: none;
+      display: flex;
+      flex-flow: column;
+      gap: 1rem;
+
+      legend {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .form-row {
+        display: flex;
+
+        &:nth-of-type(1),
+        &:nth-of-type(2) {
+          flex-flow: column;
+          gap: 0.25rem;
+        }
+
+        &:nth-of-type(3),
+        &:nth-of-type(4),
+        &:nth-of-type(5) {
+          justify-content: space-between;
+          align-items: center;
+
+          input {
+            width: 4rem;
+          }
+        }
+
+        &:last-of-type {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+  }
+
   // ***************************************************************************
 
   .overlay {
@@ -73,21 +173,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: #1424d02c;
-
-    &.active {
-      visibility: visible;
-    }
-  }
-
-  form#add-book,
-  #book-details {
-    visibility: hidden;
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: lightgrey;
+    //background-color: #1424d02c;
 
     &.active {
       visibility: visible;

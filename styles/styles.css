@@ -1,3 +1,7 @@
+*:focus {
+  outline: 2px solid #333;
+}
+
 body {
   font-family: "Libre Baskerville", serif;
   background-color: #f9f5e9;
@@ -11,10 +15,32 @@ body h1 {
 body button {
   font: bold 1rem "Libre Baskerville", serif;
   border: 2px solid #333;
-  background-color: #f9f5e9;
+  background-color: transparent;
   border-radius: 0.5rem;
   padding: 0.5rem 1.5rem;
   cursor: pointer;
+}
+body button[type=submit] {
+  background-color: #366f4d;
+  color: #f9f5e9;
+  border: 2px solid #366f4d;
+}
+body input {
+  background-color: rgba(255, 255, 255, 0.5);
+  font: bold 1rem "Libre Baskerville", serif;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+}
+body input:disabled {
+  background-color: transparent;
+  color: grey;
+}
+body input[type=checkbox] {
+  width: 2rem;
+  height: 2rem;
+  box-shadow: none;
 }
 body #books-list {
   padding: 0;
@@ -50,6 +76,50 @@ body .open-add-book-form {
   border: none;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
 }
+body form#add-book,
+body #book-details {
+  visibility: hidden;
+  background-color: #f9f5e9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  width: calc(100% - 2rem);
+  height: 100%;
+}
+body form#add-book.active,
+body #book-details.active {
+  visibility: visible;
+}
+body form#add-book fieldset {
+  border: none;
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+body form#add-book fieldset legend {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+body form#add-book fieldset .form-row {
+  display: flex;
+}
+body form#add-book fieldset .form-row:nth-of-type(1), body form#add-book fieldset .form-row:nth-of-type(2) {
+  flex-flow: column;
+  gap: 0.25rem;
+}
+body form#add-book fieldset .form-row:nth-of-type(3), body form#add-book fieldset .form-row:nth-of-type(4), body form#add-book fieldset .form-row:nth-of-type(5) {
+  justify-content: space-between;
+  align-items: center;
+}
+body form#add-book fieldset .form-row:nth-of-type(3) input, body form#add-book fieldset .form-row:nth-of-type(4) input, body form#add-book fieldset .form-row:nth-of-type(5) input {
+  width: 4rem;
+}
+body form#add-book fieldset .form-row:last-of-type {
+  margin-bottom: 2rem;
+}
 body .overlay {
   visibility: hidden;
   position: absolute;
@@ -57,22 +127,8 @@ body .overlay {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(20, 36, 208, 0.1725490196);
 }
 body .overlay.active {
-  visibility: visible;
-}
-body form#add-book,
-body #book-details {
-  visibility: hidden;
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: lightgrey;
-}
-body form#add-book.active,
-body #book-details.active {
   visibility: visible;
 }
 body #book-details .delete-book-popup {
