@@ -46,6 +46,9 @@ class UI {
       titleDiv.textContent = `${book.getTitle()}`;
       authorDiv.textContent = `${book.getAuthor()}`;
 
+      titleDiv.classList.add("title");
+      authorDiv.classList.add("author");
+
       [titleDiv, authorDiv].forEach((el) => bookBtn.appendChild(el));
       fragment.appendChild(document.createElement("li")).appendChild(bookBtn);
       booksList.appendChild(fragment);

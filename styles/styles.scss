@@ -1,5 +1,70 @@
 body {
-  font-family: sans-serif;
+  $sepia-light: #f9f5e9;
+  $sepia-dark: #333;
+  $green: #366f4d;
+  $shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+
+  font-family: "Libre Baskerville", serif;
+
+  background-color: $sepia-light;
+  margin: 0;
+  padding-bottom: 5rem;
+
+  h1 {
+    margin: 2rem 1rem 3rem 1rem;
+    text-align: center;
+  }
+
+  button {
+    font: bold 1rem "Libre Baskerville", serif;
+    border: 2px solid $sepia-dark;
+    background-color: $sepia-light;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+  }
+
+  #books-list {
+    padding: 0;
+
+    li {
+      list-style-type: none;
+      margin: 1rem;
+
+      button {
+        background-color: $sepia-dark;
+        color: $sepia-light;
+        display: block;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0.5rem;
+        box-shadow: $shadow;
+
+        .title {
+          margin: 0.25rem;
+        }
+
+        .author {
+          font-weight: normal;
+          font-size: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .open-add-book-form {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $green;
+    color: $sepia-light;
+    border: none;
+    box-shadow: $shadow;
+  }
+
+  // ***************************************************************************
 
   .overlay {
     visibility: hidden;

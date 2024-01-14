@@ -1,5 +1,54 @@
 body {
-  font-family: sans-serif;
+  font-family: "Libre Baskerville", serif;
+  background-color: #f9f5e9;
+  margin: 0;
+  padding-bottom: 5rem;
+}
+body h1 {
+  margin: 2rem 1rem 3rem 1rem;
+  text-align: center;
+}
+body button {
+  font: bold 1rem "Libre Baskerville", serif;
+  border: 2px solid #333;
+  background-color: #f9f5e9;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+body #books-list {
+  padding: 0;
+}
+body #books-list li {
+  list-style-type: none;
+  margin: 1rem;
+}
+body #books-list li button {
+  background-color: #333;
+  color: #f9f5e9;
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0.5rem;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+}
+body #books-list li button .title {
+  margin: 0.25rem;
+}
+body #books-list li button .author {
+  font-weight: normal;
+  font-size: 0.5rem;
+}
+body .open-add-book-form {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #366f4d;
+  color: #f9f5e9;
+  border: none;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
 }
 body .overlay {
   visibility: hidden;
