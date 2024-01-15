@@ -126,7 +126,7 @@ class UI {
     const readPages = document.querySelector("#read-pages");
 
     totalPages.addEventListener("input", () => {
-      if (totalPages.value < readPages.value) {
+      if (parseInt(totalPages.value) < parseInt(readPages.value)) {
         totalPages.setCustomValidity(
           "O total de páginas não pode ser menor que as páginas lidas!"
         );
@@ -144,7 +144,7 @@ class UI {
     });
 
     readPages.addEventListener("input", () => {
-      if (totalPages.value < readPages.value) {
+      if (parseInt(totalPages.value) < parseInt(readPages.value)) {
         readPages.setCustomValidity(
           "O total de páginas não pode ser menor que as páginas lidas!"
         );
