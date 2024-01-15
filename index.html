@@ -23,21 +23,33 @@
     <div class="overlay"></div>
 
     <div id="book-details">
-      <button type="button" class="close-book-details">X</button>
-      <div class="title"></div>
-      <div class="author"></div>
-      <div class="read-pages-controls">
-        <button type="button" class="decrement">-</button>
-        <input type="number" />
-        <button type="button" class="increment">+</button>
+      <button type="button" class="close-book-details">⨉</button>
+      <div class="info">
+        <div class="title"></div>
+        <div class="author"></div>
+        <div class="read-pages-controls">
+          <button type="button" class="decrement">-</button>
+          <input type="number" />
+          <button type="button" class="increment">+</button>
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="edit-book">Editar livro</button>
+          <button type="button" class="delete-book danger">Apagar livro</button>
+        </div>
       </div>
-      <button type="button" class="edit-book">Editar livro</button>
-      <button type="button" class="delete-book">Apagar livro</button>
+
+      <div class="progress-bar">
+        <div class="read"></div>
+        <div class="complete">50%</div>
+      </div>
 
       <div class="delete-book-popup">
         <p>Tem certeza que deseja apagar este livro da sua biblioteca?</p>
-        <button type="button" class="confirm-delete">Sim</button>
-        <button type="button" class="cancel-delete">Não</button>
+        <div class="buttons">
+          <button type="button" class="confirm-delete danger">Sim</button>
+          <button type="button" class="cancel-delete">Não</button>
+        </div>
       </div>
     </div>
 
