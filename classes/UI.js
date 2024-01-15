@@ -178,9 +178,8 @@ class UI {
       [decrement, increment].forEach((btn) =>
         btn.removeEventListener("click", changeReadPages)
       );
-      [deleteBtn, editBtn].forEach((btn) => {
-        btn.removeEventListener("click", handleDeleteBook);
-      });
+      editBtn.removeEventListener("click", handleEditBook);
+      deleteBtn.removeEventListener("click", handleDeleteBook);
       input.removeEventListener("change", changeReadPages);
 
       [overlay, bookDetails, popup].forEach((el) => {
@@ -245,10 +244,8 @@ class UI {
     });
 
     input.addEventListener("change", changeReadPages);
-
-    [deleteBtn, editBtn].forEach((btn) => {
-      btn.addEventListener("click", handleDeleteBook);
-    });
+    editBtn.addEventListener("click", handleEditBook);
+    deleteBtn.addEventListener("click", handleDeleteBook);
   }
 }
 
