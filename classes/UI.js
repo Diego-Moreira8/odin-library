@@ -135,6 +135,8 @@ class UI {
         readPages.setCustomValidity("");
       }
 
+      if (readCheck.value) readPages.value = totalPages.value;
+
       totalPages.reportValidity();
     });
 
