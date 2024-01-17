@@ -3,23 +3,6 @@ import Library from "./Library.js";
 class UI {
   constructor() {
     this.library = new Library();
-
-    this.library.addBook("O Último Desejo", "Andrzej Sapkowski", 5, true, 5);
-    this.library.addBook(
-      "A Espada do Destino",
-      "Andrzej Sapkowski",
-      400,
-      true,
-      400
-    );
-    this.library.addBook(
-      "O Sangue dos Elfos",
-      "Andrzej Sapkowski",
-      400,
-      false,
-      40
-    );
-
     this.start();
   }
 
@@ -135,7 +118,7 @@ class UI {
         readPages.setCustomValidity("");
       }
 
-      if (readCheck.value) readPages.value = totalPages.value;
+      if (readCheck.checked) readPages.value = totalPages.value;
 
       totalPages.reportValidity();
     });
