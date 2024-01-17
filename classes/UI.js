@@ -172,6 +172,8 @@ class UI {
     const deleteBtn = bookDetails.querySelector(".delete-book");
     const editBtn = bookDetails.querySelector(".edit-book");
     const popup = bookDetails.querySelector(".delete-book-popup");
+    const readPercentage = bookDetails.querySelector(".complete");
+    const progressBar = bookDetails.querySelector(".read");
 
     const closeAddBook = () => {
       [(overlay, closeBtn)].forEach((el) => {
@@ -198,6 +200,8 @@ class UI {
       }
 
       input.value = book.getReadPages();
+      readPercentage.textContent = getReadPercentage();
+      progressBar.style.width = getReadPercentage();
     };
 
     const handleEditBook = () => {
@@ -231,15 +235,24 @@ class UI {
       );
     };
 
+    const getReadPercentage = () => {
+      return `${(
+        (book.getReadPages() / book.getTotalPages()) *
+        100
+      ).toFixed()}%`;
+    };
+
+    title.textContent = book.getTitle();
+    author.textContent = book.getAuthor();
+    input.value = book.getReadPages();
+    readPercentage.textContent = getReadPercentage();
+    progressBar.style.width = getReadPercentage();
+
     [overlay, bookDetails].forEach((el) => el.classList.add("active"));
 
     [overlay, closeBtn].forEach((el) => {
       el.addEventListener("click", closeAddBook);
     });
-
-    title.textContent = book.getTitle();
-    author.textContent = book.getAuthor();
-    input.value = book.getReadPages();
 
     [decrement, increment].forEach((btn) => {
       btn.addEventListener("click", changeReadPages);

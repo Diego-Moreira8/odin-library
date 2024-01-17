@@ -182,7 +182,7 @@ body #book-details .progress-bar {
 }
 body #book-details .progress-bar .read {
   background-color: #366f4d;
-  width: 50%;
+  width: 0%;
   height: 100%;
 }
 body #book-details .progress-bar .complete {
