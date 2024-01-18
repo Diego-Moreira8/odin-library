@@ -74,13 +74,7 @@ class UI {
         book.setReadPages(readPages);
         this.openBookDetails(book);
       } else {
-        this.library.addBook(
-          title,
-          author,
-          parseInt(totalPages),
-          !!read,
-          parseInt(readPages)
-        );
+        this.library.addBook(title, author, totalPages, !!read, readPages);
       }
 
       this.refreshBooksList();
