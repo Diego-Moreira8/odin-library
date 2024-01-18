@@ -30,9 +30,10 @@ class Book {
   };
 
   setTotalPages = (newAmount) => {
+    console.log(newAmount);
     if (typeof newAmount === "string") newAmount = parseInt(newAmount);
 
-    if (this.totalPages < this.readPages) {
+    if (this.totalPages >= this.readPages) {
       this.totalPages = newAmount;
     }
 
