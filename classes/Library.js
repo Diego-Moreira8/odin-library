@@ -3,7 +3,8 @@ import Book from "./Book.js";
 class Library {
   constructor() {
     this.books = [];
-    this.id = 0;
+    this.nextBookId = 0;
+    this.getLocalStorage();
   }
 
   getBooks = () => this.books;
@@ -12,13 +13,29 @@ class Library {
 
   addBook(title, author, totalPages, read, readPages) {
     this.books.push(
-      new Book(this.id, title, author, totalPages, read, readPages)
+      new Book(this.nextBookId, title, author, totalPages, read, readPages)
     );
-    this.id++;
+    this.nextBookId++;
+
+    this.updateLocalStorage();
   }
 
   deleteBook(id) {
     this.books = [...this.books.filter((book) => book.id !== id)];
+  }
+
+  getLocalStorage() {
+    const userLibrary = JSON.parse(localStorage.getItem("userLibrary"));
+    if (userLibrary) {
+      userLibrary.forEach((book) => {
+        const { title, author, totalPages, read, readPages } = book;
+        this.addBook(title, author, totalPages, read, readPages);
+      });
+    }
+  }
+
+  updateLocalStorage() {
+    localStorage.setItem("userLibrary", JSON.stringify(this.books));
   }
 }
 

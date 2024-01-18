@@ -36,6 +36,8 @@ class UI {
       fragment.appendChild(document.createElement("li")).appendChild(bookBtn);
       booksList.appendChild(fragment);
     }
+
+    this.library.updateLocalStorage();
   }
 
   openBookForm(book) {
@@ -72,7 +74,13 @@ class UI {
         book.setReadPages(readPages);
         this.openBookDetails(book);
       } else {
-        this.library.addBook(title, author, totalPages, !!read, readPages);
+        this.library.addBook(
+          title,
+          author,
+          parseInt(totalPages),
+          !!read,
+          parseInt(readPages)
+        );
       }
 
       this.refreshBooksList();
@@ -185,6 +193,7 @@ class UI {
       input.value = book.getReadPages();
       readPercentage.textContent = getReadPercentage();
       progressBar.style.width = getReadPercentage();
+      this.library.updateLocalStorage();
     };
 
     const handleEditBook = () => {
