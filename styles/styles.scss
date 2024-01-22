@@ -4,6 +4,7 @@ $green: #366f4d;
 $danger: darkred;
 $radius: 0.5rem;
 $shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+$screen-sm: 600px;
 
 * {
   &:focus {
@@ -124,20 +125,32 @@ body {
     visibility: hidden;
 
     background-color: $sepia-light;
+    box-shadow: $shadow;
 
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: $radius;
+    min-width: 500px;
+
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
 
     &.active {
       visibility: visible;
+      opacity: 1;
+    }
+
+    @media (max-width: $screen-sm) {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
     }
   }
 
   form#add-book {
-    padding: 1rem;
-    width: calc(100% - 2rem);
+    padding: 2rem;
 
     fieldset {
       border: none;
@@ -180,7 +193,6 @@ body {
   }
 
   #book-details {
-    width: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -191,15 +203,13 @@ body {
       border: none;
       font-size: 2rem;
       align-self: flex-end;
-      padding: 1rem;
-      margin: 1rem;
     }
 
     .info {
       display: flex;
       flex-flow: column;
       gap: 1rem;
-      padding: 2rem;
+      padding: 10rem 2rem;
 
       .title {
         font-weight: bold;
@@ -232,11 +242,21 @@ body {
       width: 100%;
       height: 2rem;
       background-color: #366f4da3;
+      border-radius: 0 0 $radius $radius;
+
+      @media (max-width: $screen-sm) {
+        border-radius: 0;
+      }
 
       .read {
         background-color: $green;
         width: 0%; // defined in JavaScript
         height: 100%;
+        border-radius: 0 0 $radius $radius;
+
+        @media (max-width: $screen-sm) {
+          border-radius: 0;
+        }
       }
 
       .complete {
@@ -269,19 +289,21 @@ body {
     }
   }
 
-  // ***************************************************************************
-
   .overlay {
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    //background-color: #1424d02c;
+    background-color: #0000004c;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 100ms;
 
     &.active {
       visibility: visible;
+      opacity: 1;
     }
   }
 }
