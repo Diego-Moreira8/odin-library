@@ -1,3 +1,3 @@
-import UI from "/classes/UI.js";
+import UI from "./classes/UI.js";
 
 new UI();
