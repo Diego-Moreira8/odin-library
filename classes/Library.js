@@ -11,9 +11,9 @@ class Library {
 
   getBook = (id) => this.books.find((book) => book.id === id);
 
-  addBook(title, author, totalPages, read, readPages) {
+  addBook(title, author, totalPages, readPages) {
     this.books.push(
-      new Book(this.nextBookId, title, author, totalPages, read, readPages)
+      new Book(this.nextBookId, title, author, totalPages, readPages)
     );
     this.nextBookId++;
 
@@ -28,8 +28,8 @@ class Library {
     const userLibrary = JSON.parse(localStorage.getItem("userLibrary"));
     if (userLibrary) {
       userLibrary.forEach((book) => {
-        const { title, author, totalPages, read, readPages } = book;
-        this.addBook(title, author, totalPages, read, readPages);
+        const { title, author, totalPages, readPages } = book;
+        this.addBook(title, author, totalPages, readPages);
       });
     }
   }

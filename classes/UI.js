@@ -71,10 +71,10 @@ class UI {
         book.setTitle(title);
         book.setAuthor(author);
         book.setTotalPages(totalPages);
-        book.setReadPages(readPages);
+        book.setReadPages(read === "on" ? totalPages : readPages);
         this.openBookDetails(book);
       } else {
-        this.library.addBook(title, author, totalPages, !!read, readPages);
+        this.library.addBook(title, author, totalPages, readPages);
       }
 
       this.refreshBooksList();
@@ -110,10 +110,14 @@ class UI {
     const readCheck = document.querySelector("#read-check");
     const readPages = document.querySelector("#read-pages");
 
-    totalPages.addEventListener("input", () => {
+    const validateTotalPages = () => {
       if (parseInt(totalPages.value) < parseInt(readPages.value)) {
         totalPages.setCustomValidity(
           "O total de páginas não pode ser menor que as páginas lidas!"
+        );
+      } else if (parseInt(totalPages.value) <= 0) {
+        totalPages.setCustomValidity(
+          "O total de páginas precisa ser maior que 0!"
         );
       } else {
         totalPages.setCustomValidity("");
@@ -123,14 +127,9 @@ class UI {
       if (readCheck.checked) readPages.value = totalPages.value;
 
       totalPages.reportValidity();
-    });
+    };
 
-    readCheck.addEventListener("change", () => {
-      readPages.value = readCheck.checked ? totalPages.value : 0;
-      readPages.disabled = readCheck.checked;
-    });
-
-    readPages.addEventListener("input", () => {
+    const validateReadPages = () => {
       if (parseInt(totalPages.value) < parseInt(readPages.value)) {
         readPages.setCustomValidity(
           "O total de páginas não pode ser menor que as páginas lidas!"
@@ -142,7 +141,20 @@ class UI {
       }
 
       readPages.reportValidity();
-    });
+    };
+
+    const validateReadCheck = () => {
+      readPages.value = readCheck.checked ? totalPages.value : 0;
+      readPages.disabled = readCheck.checked;
+    };
+
+    validateTotalPages();
+    validateReadPages();
+    validateReadCheck();
+
+    totalPages.addEventListener("input", validateTotalPages);
+    readCheck.addEventListener("change", validateReadCheck);
+    readPages.addEventListener("input", validateReadPages);
   }
 
   openBookDetails(book) {

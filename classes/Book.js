@@ -1,10 +1,10 @@
 class Book {
-  constructor(id, title, author, totalPages, read, readPages) {
+  constructor(id, title, author, totalPages, readPages) {
     this.id = id;
     this.title = title;
     this.author = author;
     this.totalPages = totalPages;
-    this.readPages = read ? totalPages : readPages;
+    this.readPages = readPages;
     this.read = this.setReadStatus();
   }
 
@@ -24,17 +24,20 @@ class Book {
 
     if (newAmount >= 0 && newAmount <= this.totalPages) {
       this.readPages = newAmount;
+    } else {
+      console.error("Invalid read pages amount");
     }
 
     this.read = this.setReadStatus();
   };
 
   setTotalPages = (newAmount) => {
-    console.log(newAmount);
     if (typeof newAmount === "string") newAmount = parseInt(newAmount);
 
-    if (this.totalPages >= this.readPages) {
+    if (newAmount > 0 && this.totalPages >= this.readPages) {
       this.totalPages = newAmount;
+    } else {
+      console.error("Invalid total pages amount");
     }
 
     this.read = this.setReadStatus();
