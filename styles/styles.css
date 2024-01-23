@@ -97,7 +97,7 @@ body #book-details {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 0.5rem;
-  min-width: 500px;
+  min-width: 350px;
   opacity: 0;
   transition: opacity 200ms ease-in-out;
 }
@@ -106,7 +106,7 @@ body #book-details.active {
   visibility: visible;
   opacity: 1;
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   body form#add-book,
   body #book-details {
     width: 100%;
@@ -191,7 +191,7 @@ body #book-details .progress-bar {
   background-color: rgba(54, 111, 77, 0.6392156863);
   border-radius: 0 0 0.5rem 0.5rem;
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   body #book-details .progress-bar {
     border-radius: 0;
   }
@@ -202,7 +202,7 @@ body #book-details .progress-bar .read {
   height: 100%;
   border-radius: 0 0 0.5rem 0.5rem;
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   body #book-details .progress-bar .read {
     border-radius: 0;
   }
